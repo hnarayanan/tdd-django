@@ -1,6 +1,7 @@
-from django.core.urlresolvers import resolve
 from django.test import TestCase
 from django.http import HttpRequest
+from django.core.urlresolvers import resolve
+from django.template.loader import render_to_string
 
 from .views import home_page
 
@@ -14,6 +15,5 @@ class HomePageTest(TestCase):
     def test_home_page_returns_correct_html(self):
         request = HttpRequest()
         response = home_page(request)
-        self.assertTrue(response.content.startswith(u'<html>'))
-        self.assertIn(u'<title>To-Do Lists</title>', response.content)
-        self.assertTrue(response.content.strip().endswith(u'</html>'))
+        expected_html = render_to_string('home.html')
+        self.assertTrue(response.content.decode(), expected_html)
