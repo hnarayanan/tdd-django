@@ -8,5 +8,6 @@ tmp
 *~
 \#*#
 /venv
+/virtualenv
 /database/db.sqlite3
 /static
