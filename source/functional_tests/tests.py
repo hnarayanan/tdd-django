@@ -82,19 +82,19 @@ class NewVisitorTest(LiveServerTestCase):
         self.browser = webdriver.Firefox()
 
         # Francis visits the home page. There is no sign of Edith's
-        # list
+        # list.
         self.browser.get(self.server_url)
         page_text = self.browser.find_element_by_tag_name('body').text
         self.assertNotIn('Buy peacock feathers', page_text)
         self.assertNotIn('make a fly', page_text)
 
         # Francis starts a new list by entering a new item. He is less
-        # interesting than Edith
+        # interesting than Edith.
         inputbox = self.browser.find_element_by_id('id_new_item')
         inputbox.send_keys('Buy milk')
         inputbox.send_keys(Keys.ENTER)
 
-        # Francis gets his own unique URL
+        # Francis gets his own unique URL.
         francis_list_url = self.browser.current_url
         self.assertRegexpMatches(francis_list_url, '/lists/.+')
         self.assertNotEqual(francis_list_url, edith_list_url)
@@ -128,3 +128,21 @@ class NewVisitorTest(LiveServerTestCase):
             512,
             delta=5
         )
+
+    def test_cannot_add_empty_list_items(self):
+        # Edith goes to hte home page and accidentally tries to submit
+        # an empty list item. She hits Enter on the empty input box.
+        self.fail('Write me!')
+
+        # The home page refreshes, and there is an error message
+        # saying that list items cannot be blank.
+
+        # She tries again with smoe text for the item, which now
+        # works.
+
+        # Perversely, she now decides to submit a second blank list
+        # item.
+
+        # She recieves a similar warning on the list page.
+
+        # And she can correct it by filling some text in.
