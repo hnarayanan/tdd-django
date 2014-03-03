@@ -57,3 +57,17 @@ class ListAndItemModelTest(TestCase):
         Item.objects.create(list=list1, text='bla')
         item = Item(list=list2, text='bla')
         item.full_clean() # Should not raise an exception
+
+    def test_list_ordering(self):
+        list_ = List.objects.create()
+        item1 = Item.objects.create(list=list_, text='i1')
+        item2 = Item.objects.create(list=list_, text='item 2')
+        item3 = Item.objects.create(list=list_, text='3')
+        self.assertEqual(
+            list(Item.objects.all()),
+            [item1, item2, item3]
+        )
+
+    def test_string_representation(self):
+        item = Item(text='some text')
+        self.assertEqual(str(item), 'some text')
