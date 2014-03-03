@@ -5,7 +5,6 @@ from django.test import LiveServerTestCase
 from selenium import webdriver
 
 
-
 class FunctionalTest(LiveServerTestCase):
 
     @classmethod
