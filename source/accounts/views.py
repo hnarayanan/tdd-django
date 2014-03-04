@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import sys
 
 from django.contrib.auth import authenticate
@@ -14,4 +16,4 @@ def login(request):
 
 def logout(request):
     auth_logout(request)
-    retur redirect('/')
+    return redirect('/')
